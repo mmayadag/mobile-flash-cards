@@ -1,38 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Router, Route, Link } from './react-router';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Home = () => <Text>Home</Text>;
+// Screens
+import HomeScreen from './src/Screens/Home';
+import AddDeckScreen from './src/Screens/AddQuestion';
+import Deck from './src/Shared/Chat';
 
-const About = () => <Text>About</Text>;
+const Stack = createStackNavigator();
 
 const App = () => (
-  <Router>
-    <View style={styles.container}>
-      <View style={styles.nav}>
-        <Link to="/">
-          <Text>Home</Text>
-        </Link>
-        <Link to="/about">
-          <Text>About</Text>
-        </Link>
-      </View>
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="AddDeck" component={AddDeckScreen} />
+      <Stack.Screen name="Deck" component={Deck} />
 
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-    </View>
-  </Router>
+    </Stack.Navigator>
+  </NavigationContainer>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 25,
-    padding: 10
-  },
-  nav:{
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-});
 
 export default App;
