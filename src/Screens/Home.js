@@ -4,7 +4,8 @@ import {
     createBottomTabNavigator
 } from '@react-navigation/bottom-tabs';
 import Decks from './Decks';
-import AddQuestion from './AddQuestion';
+import AddCard from './AddCard';
+import AddDeck from './AddDeck';
 import { Ionicons } from '@expo/vector-icons';
 
 const BottomTabs = createBottomTabNavigator();
@@ -22,8 +23,8 @@ const Home = ({ navigation }) => (
             }}
         />
         <BottomTabs.Screen
-            name="AddQuestion"
-            component={AddQuestion}
+            name="Add Deck"
+            component={AddDeck}
             options={{
                 tabBarLabel: 'Add Deck',
                 tabBarIcon: ({ color, size }) => (

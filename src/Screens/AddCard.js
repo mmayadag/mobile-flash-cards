@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import {
-    Text, TouchableOpacity, View, KeyboardAvoidingView,
+    View, KeyboardAvoidingView,
     Keyboard,
     Platform,
     TouchableWithoutFeedback
 } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-import Input from '../Shared/Input';
-import Button from '../Shared/Button';
-import Title from '../Shared/Title';
+import { Button, CancelButton, Input, Title } from '../Shared';
 
-const Home = ({ route, navigation }) => {
+const AddCard = ({ route, navigation }) => {
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState("");
     const clearForm = () => {
@@ -49,14 +47,9 @@ const Home = ({ route, navigation }) => {
                             // TODO: Save To async store
                             console.log({ question, answer, title })
                             NavigateToDecks();
-                        }
-                        }
+                        }}
                     />
-                    <TouchableWithoutFeedback onPress={() => { NavigateToDecks(); }}>
-                        <Text style={styles.cancel}>
-                            Cancel
-                        </Text>
-                    </TouchableWithoutFeedback>
+                    <CancelButton onPress={() => { NavigateToDecks(); }} />
                 </View>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -68,12 +61,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    cancel: {
-        textAlign: 'center',
-        padding: 10,
-        marginTop: 10,
-        alignSelf: 'stretch'
-    }
 })
 
-export default Home;
+export default AddCard;

@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const ButtonContainer = styled.TouchableOpacity`
-    background-color: black;
+    background-color: ${props => (props.secondary ? 'white' : 'black')};;
     padding: 15px;
     border-color: gray;
     border-style: solid;
@@ -13,27 +13,17 @@ const ButtonContainer = styled.TouchableOpacity`
 `
 
 const ButtonText = styled.Text`
-    color: white;
+    color: ${props => (props.secondary ? 'black' : 'white')};
     text-align: center;
 `;
 
-const Button = ({ title, ...props }) =>
-    <ButtonContainer {...props}>
-        <ButtonText>{title}</ButtonText>
-    </ButtonContainer>;
-
-/*
-const styles = StyleSheet.create({
-    button: {
-        backgroundColor: 'black',
-        padding: 15,
-        borderColor: "gray",
-        borderStyle: "solid",
-        marginHorizontal: 60,
-        borderRadius: 50,
-        marginTop: 20,
-    }
-})
-*/
+const Button = ({ title, ...props }) => {
+    const { secondary = false } = props;
+    return (
+        <ButtonContainer {...props}>
+            <ButtonText secondary={secondary}>{title}</ButtonText>
+        </ButtonContainer>
+    );
+}
 
 export default Button;

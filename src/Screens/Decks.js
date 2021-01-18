@@ -2,7 +2,8 @@ import React from 'react';
 import { SafeAreaView, Text, View, StyleSheet, FlatList, StatusBar, TouchableOpacity } from 'react-native';
 //import { StyleSheet } from 'react-native';
 
-import Title from '../Shared/Title';
+import { DeckItem } from '../Shared';
+
 const DATA1 = {
     React: {
         title: 'React',
@@ -30,17 +31,14 @@ const DATA1 = {
 
 const DATA = Object.keys(DATA1).map(i => ({ title: i, size: DATA1[i].questions.length.toString() }))
 
-const Item = ({ title, size, onPress }) => (
-    <TouchableOpacity style={styles.item} onPress={onPress}>
-        <Title>{title}</Title>
-        <Text style={styles.subTitle}>{size > 0 ? size + " card" + (size > 1 ? "s" : "") : "no cards"}</Text>
-    </TouchableOpacity>
-);
+const Item = ({ title, size, onPress }) =>
+    <DeckItem title={title} size={size} onPress={onPress} />;
 
 const RenderItem = ({ item: { title, size }, navigation }) => (
     <Item title={title} size={size} onPress={() => {
-        navigation.navigate('AddQuestion', {
-            title: title
+        navigation.navigate('Deck', {
+            title: title,
+            data: DATA1[title]
         })
     }
     } />
@@ -50,7 +48,6 @@ const Page = ({ navigation, title }) => <SafeAreaView style={styles.container}>
     <FlatList
         data={DATA}
         renderItem={(obj) => <RenderItem item={obj.item} navigation={navigation} />}
-
         keyExtractor={item => item.title}
     />
 </SafeAreaView>;
@@ -68,13 +65,6 @@ const styles = StyleSheet.create({
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
-    },
-    title: {
-        fontSize: 32,
-    },
-    subTitle: {
-        paddingTop: 10,
-        fontSize: 16,
     }
 });
 
