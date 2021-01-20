@@ -1,7 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { CardCountText } from '../Utils/Text';
-import { Title, SubTitle } from './index';
+import Title from './Title';
+import SubTitle from './SubTitle';
 
 const DeckItem = ({ title, size, ...props }) => (
     <TouchableOpacity style={styles.item} {...props}>

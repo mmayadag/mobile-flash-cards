@@ -1,70 +1,65 @@
-import React from 'react';
-import { SafeAreaView, Text, View, StyleSheet, FlatList, StatusBar, TouchableOpacity } from 'react-native';
-//import { StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, Text, View, StyleSheet, FlatList, StatusBar } from 'react-native';
+import { getDecks } from '../Storage/Store';
 
-import { DeckItem } from '../Shared';
-
-const DATA1 = {
-    React: {
-        title: 'React',
-        questions: [
-            {
-                question: 'What is React?',
-                answer: 'A library for managing user interfaces'
-            },
-            {
-                question: 'Where do you make Ajax requests in React?',
-                answer: 'The componentDidMount lifecycle event'
-            }
-        ]
-    },
-    JavaScript: {
-        title: 'JavaScript',
-        questions: [
-            {
-                question: 'What is a closure?',
-                answer: 'The combination of a function and the lexical environment within which that function was declared.'
-            }
-        ]
-    }
-}
-
-const DATA = Object.keys(DATA1).map(i => ({ title: i, size: DATA1[i].questions.length.toString() }))
+import { DeckItem, Button } from '../Shared';
 
 const Item = ({ title, size, onPress }) =>
     <DeckItem title={title} size={size} onPress={onPress} />;
 
-const RenderItem = ({ item: { title, size }, navigation }) => (
-    <Item title={title} size={size} onPress={() => {
-        navigation.navigate('Deck', {
-            title: title,
-            data: DATA1[title]
-        })
-    }
-    } />
+const RenderItem = ({ item: { title, size }, navigation, border }) => (
+    <View style={((border === true) ? { borderBottomWidth: 1, borderBottomColor: 'lightgray' } : '')}>
+        <Item title={title} size={size} onPress={() => {
+            navigation.navigate('Deck', {
+                title: title,
+            })
+        }
+        } />
+    </View >
 );
 
-const Page = ({ navigation, title }) => <SafeAreaView style={styles.container}>
-    <FlatList
-        data={DATA}
-        renderItem={(obj) => <RenderItem item={obj.item} navigation={navigation} />}
-        keyExtractor={item => item.title}
-    />
-</SafeAreaView>;
+const Page = ({ navigation, title }) => {
+    const [decks, setDecks] = useState();
 
+    const readItemFromStorage = async () => {
+        const decksData = await getDecks();
+        if (decksData) {
+            let decks_list = Object.keys(decksData).map(i => ({ title: i, size: decksData[i].questions.length.toString() }))
+            setDecks(decks_list);
+        }
+    };
+
+    // TODO: fix memory leak
+    useEffect(() => {
+        readItemFromStorage();
+    });
+
+    return (<SafeAreaView style={styles.container}>
+        { decks && decks.length > 0 ?
+            <FlatList
+                data={decks}
+                renderItem={({ item, index }) => <RenderItem
+                    border={index !== decks.length - 1}
+                    item={item}
+                    navigation={navigation} />}
+                keyExtractor={item => item.title}
+                extraData={decks}
+            />
+            :
+            <View style={{ justifyContent: 'center', flex: 1, }}>
+                <Text style={{ textAlign: 'center' }}> No Deck found</Text>
+                <Button title="Create Deck" onPress={() => {
+                    navigation.navigate('Add Deck')
+                }} />
+            </View>
+        }
+    </SafeAreaView>)
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
-    },
-    item: {
-        flexDirection: 'column',
-        textAlign: 'center',
-        alignItems: 'center',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
     }
 });
 

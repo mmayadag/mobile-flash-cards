@@ -8,6 +8,7 @@ import {
 import { StyleSheet } from 'react-native';
 
 import { Button, CancelButton, Input, Title } from '../Shared';
+import { saveQuestion } from '../Storage/Store'
 
 const AddCard = ({ route, navigation }) => {
     const [question, setQuestion] = useState("");
@@ -17,9 +18,14 @@ const AddCard = ({ route, navigation }) => {
         setAnswer("");
     }
     const NavigateToDecks = () => {
+        createQuestion(question, answer);
         clearForm();
         navigation.navigate('Decks')
     }
+    const createQuestion = async (q, a) => {
+        await saveQuestion(q, a, title);
+    };
+
     let title = route.params.title ?? "undefined"
     return (
         <KeyboardAvoidingView
@@ -44,8 +50,6 @@ const AddCard = ({ route, navigation }) => {
                     <Button
                         title="Submit"
                         onPress={() => {
-                            // TODO: Save To async store
-                            console.log({ question, answer, title })
                             NavigateToDecks();
                         }}
                     />

@@ -9,8 +9,11 @@ import { StyleSheet } from 'react-native';
 
 import { Button, CancelButton, Input, Title } from '../Shared';
 
+import { createDeckObject } from '../Storage/Store';
+
 const AddDeck = ({ route, navigation }) => {
     const [question, setQuestion] = useState("");
+
     const clearForm = () => {
         setQuestion("");
     }
@@ -18,6 +21,10 @@ const AddDeck = ({ route, navigation }) => {
         clearForm();
         navigation.navigate('Decks')
     }
+
+    const writeItemToStorage = async deckTitle => {
+        await createDeckObject(deckTitle);
+    };
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -26,18 +33,18 @@ const AddDeck = ({ route, navigation }) => {
                 <View>
                     <Title>What is title of your new deck ?</Title>
                     <Input
-                        title="Question"
                         onChangeText={(text) => { setQuestion(text) }}
-                        placeholder="question"
+                        placeholder="title"
                         value={question}
                         autoFocus
                     />
                     <Button
                         title="Submit"
                         onPress={() => {
-                            // TODO: Save To async store
-                            console.log({ question })
-                            NavigateToDecks();
+                            if (question && question.length > 0) {
+                                writeItemToStorage(question);
+                                NavigateToDecks();
+                            }
                         }}
                     />
                     <CancelButton onPress={() => { NavigateToDecks(); }} />

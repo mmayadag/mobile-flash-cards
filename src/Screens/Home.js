@@ -20,6 +20,7 @@ const Home = ({ navigation }) => (
                 tabBarIcon: ({ color, size }) => (
                     <Ionicons name="layers-outline" size={size} color={color} />
                 ),
+                title: 'test'
             }}
         />
         <BottomTabs.Screen
