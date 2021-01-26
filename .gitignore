@@ -61,3 +61,8 @@ buck-out/
 # Expo
 .expo/*
 web-build/
+
+/.scannerwork
+sonar-project.properties
+sonar.sh
+.eslintcache
