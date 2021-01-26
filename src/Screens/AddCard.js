@@ -17,10 +17,10 @@ const AddCard = ({ route, navigation }) => {
         setQuestion("");
         setAnswer("");
     }
-    const NavigateToDecks = () => {
-        createQuestion(question, answer);
+    const NavigateToDecks = async () => {
+        await createQuestion(question, answer);
         clearForm();
-        navigation.navigate('Decks')
+        navigation.goBack()
     }
     const createQuestion = async (q, a) => {
         await saveQuestion(q, a, title);
