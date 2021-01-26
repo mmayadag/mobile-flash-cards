@@ -53,6 +53,8 @@ const Page = ({ navigation, title }) => {
                 }} />
             </View>
         }
+        <StatusBar backgroundColor="blue" barStyle={'dark-content'} />
+
     </SafeAreaView>)
 };
 

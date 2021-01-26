@@ -34,6 +34,27 @@ const Question = (question, answer) => ({
     answer
 })
 
+export const getCards = async (title) => {
+    try {
+        const jsonValue = await getDecks()
+        return (jsonValue != null && jsonValue[title] !== undefined) ? jsonValue[title].questions : null;
+    } catch (e) {
+        // error reading value
+    }
+}
+
+export const deleteCard = async (title, item) => {
+    try {
+        const decks = await getDecks();
+        if (decks !== null && decks[title] !== undefined) {
+            decks[title].questions = decks[title].questions.filter(i => (i.question !== item.question))
+            await saveDecks(decks);
+        }
+    } catch (e) {
+        // saving error
+    }
+}
+
 export const saveQuestion = async (_question, _answer, title) => {
     // TODO: null check variables
     const newQuestion = Question(_question, _answer);
