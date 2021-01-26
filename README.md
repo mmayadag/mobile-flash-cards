@@ -17,3 +17,11 @@ React Native Flash Cards , questions and answers.
 #### Tested
 
     with iOS (iPhone12 & iPhone 6s) & android emulators
+
+## Author
+
+Murat Mayadağ - [GitHub](https://github.com/mmayadag) - [LinkedIn](https://www.linkedin.com/in/murat-mayadag/)
+
+## License
+
+This project is licensed under the MIT License.
