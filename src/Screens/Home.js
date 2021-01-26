@@ -1,49 +1,48 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import {
-    createBottomTabNavigator
+  createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import Decks from './Decks';
-import AddCard from './AddCard';
-import AddDeck from './AddDeck';
 import { Ionicons } from '@expo/vector-icons';
+import Decks from './Decks';
+import AddDeck from './AddDeck';
 
 const BottomTabs = createBottomTabNavigator();
 
-const Home = ({ navigation }) => (
-    <BottomTabs.Navigator barStyle={styles.tabBar}>
-        <BottomTabs.Screen
-            name="Decks"
-            component={Decks}
-            options={{
-                tabBarLabel: 'Decks',
-                tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="layers-outline" size={size} color={color} />
-                ),
-                title: 'test'
-            }}
-        />
-        <BottomTabs.Screen
-            name="Add Deck"
-            component={AddDeck}
-            options={{
-                tabBarLabel: 'Add Deck',
-                tabBarIcon: ({ color, size }) => (
-                    <Ionicons name="layers-outline" size={size} color={color} />
-                ),
-            }}
-        />
-    </BottomTabs.Navigator>
-);
-
 const styles = StyleSheet.create({
-    tabBar: {
-        backgroundColor: 'white',
-    },
+  tabBar: {
+    backgroundColor: 'white',
+  },
 });
 
-export default Home;
+const Home = () => (
+  <BottomTabs.Navigator barStyle={styles.tabBar}>
+    <BottomTabs.Screen
+      name="Decks"
+      component={Decks}
+      options={{
+        tabBarLabel: 'Decks',
+        tabBarIcon: ({ color, size }) => (
+          <Ionicons name="layers-outline" size={size} color={color} />
+        ),
+        title: 'test',
+      }}
+    />
+    <BottomTabs.Screen
+      name="Add Deck"
+      component={AddDeck}
+      options={{
+        tabBarLabel: 'Add Deck',
+        tabBarIcon: ({ color, size }) => (
+          <Ionicons name="layers-outline" size={size} color={color} />
+        ),
+      }}
+    />
+  </BottomTabs.Navigator>
+);
 
+export default Home;
 /*
 
                 options={{
