@@ -13,6 +13,19 @@ React Native Flash Cards , questions and answers.
 - install Expo project `yarn`
 - start iOS project : `yarn ios`
 - start project : `yarn android`
+## Screen Shots
+<p align="center">
+  <img src="./ss/1.png" height="200" title="screenshot">
+  <img src="./ss/2.png" height="200" title="Screenshot">
+  <img src="./ss/3.png" height="200" title="Screenshot">
+  <img src="./ss/4.png" height="200" title="Screenshot">
+</p>
+<p align="center">
+  <img src="./ss/5.png" height="200" title="screenshot">
+  <img src="./ss/6.png" height="200" title="Screenshot">
+  <img src="./ss/7.png" height="200" title="Screenshot">
+  <img src="./ss/8.png" height="200" title="Screenshot">
+</p>
 
 #### Tested
 
