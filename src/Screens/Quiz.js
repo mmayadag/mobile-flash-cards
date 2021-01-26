@@ -13,6 +13,8 @@ import {
 } from '../Shared';
 import { getCards } from '../Storage/Store';
 
+import { clearLocalNotification, setLocalNotification } from '../Utils/Notification';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -98,7 +100,8 @@ const EndGame = ({ stats, restart, goback }) => {
   const percentece = (yes / (yes + no)).toFixed(2) * 100;
   const color = percentece !== 0 ? '#028004' : '#d4271c';
   const quizResult = percentece !== 0 ? 'pass' : 'fail';
-
+  clearLocalNotification()
+    .then(setLocalNotification);
   return (
     <View style={styles.container}>
       <View>

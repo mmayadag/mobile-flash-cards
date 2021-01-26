@@ -29,7 +29,7 @@ const AddDeck = ({ navigation }) => {
   };
   const NavigateToDecks = () => {
     clearForm();
-    navigation.navigate('Decks');
+    navigation.goBack();
   };
 
   const writeItemToStorage = async (deckTitle) => {
