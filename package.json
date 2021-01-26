@@ -1,6 +1,6 @@
 {
-  "name": "myreads",
-  "description": "MyReads is A Book Lending App.",
+  "name": "mobileflashcards",
+  "description": "Mobile flash cards is a react native app.",
   "keywords": [
     "react",
     "react-js",
@@ -8,7 +8,7 @@
     "rest-api"
   ],
   "version": "0.1.0",
-  "repository": "https://github.com/mmayadag/MyReads-nd.git",
+  "repository": "https://github.com/mmayadag/mobile-flash-cards.git",
   "author": "Murat Mayadağ <murat-2@hotmail.com>",
   "license": "MIT",
   "private": true,
